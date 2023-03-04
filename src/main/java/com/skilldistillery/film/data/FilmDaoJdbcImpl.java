@@ -320,6 +320,36 @@ public class FilmDaoJdbcImpl implements FilmDAO {
 		}
 		return true;
 	}
+	@Override
+	public boolean deleteFilm(Film film) {
+		Connection conn = null;
+		try {
+
+			conn = DriverManager.getConnection(URL, user, pass);
+			conn.setAutoCommit(false); // START TRANSACTION
+			String sql = "DELETE FROM film_actor WHERE film_id  = LAST_INSERT_ID()";
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, film.getId());
+			int updateCount = stmt.executeUpdate();
+			
+			sql = "DELETE FROM film WHERE id = LAST_INSERT_ID()";
+			stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, film.getId());
+			updateCount = stmt.executeUpdate();
+			conn.commit(); // COMMIT TRANSACTION
+		} catch (SQLException sqle) {
+			sqle.printStackTrace();
+			if (conn != null) {
+				try {
+					conn.rollback();
+				} catch (SQLException sqle2) {
+					System.err.println("Error trying to rollback");
+				}
+			}
+			return false;
+		}
+		return true;
+	}
 
 	@Override
 	public Film createFilm(Film film) {
@@ -369,11 +399,7 @@ public class FilmDaoJdbcImpl implements FilmDAO {
 
 	}
 
-	@Override
-	public boolean deleteFilm(int filmId) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+	
 
 	@Override
 	public Film updateFilm(int filmId, Film film) {

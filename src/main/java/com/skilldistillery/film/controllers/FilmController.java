@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.skilldistillery.film.data.FilmDAO;
+import com.skilldistillery.film.data.FilmDaoJdbcImpl;
 import com.skilldistillery.film.entities.Film;
 
 @Controller
@@ -58,6 +59,15 @@ public class FilmController {
 		}
 
 	}
+	
+	@RequestMapping(path = "deleteFilm.do", method =RequestMethod.POST)
+	public String deleteFilm(Model model, Film film) {
+		boolean result  = filmDao.deleteFilm(film);
+		return "deleteFilm";
+		
+	}
+	
+	
 	
 	
 
