@@ -327,12 +327,12 @@ public class FilmDaoJdbcImpl implements FilmDAO {
 
 			conn = DriverManager.getConnection(URL, user, pass);
 			conn.setAutoCommit(false); // START TRANSACTION
-			String sql = "DELETE FROM film_actor WHERE film_id  = LAST_INSERT_ID()";
+			String sql = "DELETE FROM film_actor WHERE film_id  =?";
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			stmt.setInt(1, film.getId());
 			int updateCount = stmt.executeUpdate();
 			
-			sql = "DELETE FROM film WHERE id = LAST_INSERT_ID()";
+			sql = "DELETE FROM film WHERE id = ?";
 			stmt = conn.prepareStatement(sql);
 			stmt.setInt(1, film.getId());
 			updateCount = stmt.executeUpdate();
