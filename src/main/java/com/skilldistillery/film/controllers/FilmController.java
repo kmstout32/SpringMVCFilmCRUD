@@ -9,13 +9,12 @@ import com.skilldistillery.film.data.FilmDAO;
 
 @Controller
 public class FilmController {
-@Autowired
- private FilmDAO filmDao;
+	@Autowired
+	private FilmDAO filmDao;
 
-@RequestMapping(path = {"/","home.do"})
-public String goHome(Model model) {
-	return "home";
-}
-
+	@RequestMapping(path = { "/", "home.do" })
+	public String goHome(Model model) {
+		return "home";
+	}
 
 }
