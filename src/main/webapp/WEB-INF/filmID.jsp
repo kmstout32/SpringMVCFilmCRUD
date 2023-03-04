@@ -56,7 +56,10 @@
 				</tr>
 			</table>
 		</c:when>
-		
+
 	</c:choose>
+	<form action="home.do">
+		<input type="submit" value="Return Home">
+	</form>
 </body>
 </html>
