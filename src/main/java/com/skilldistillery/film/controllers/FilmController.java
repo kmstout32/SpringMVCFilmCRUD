@@ -50,7 +50,7 @@ public class FilmController {
 	@RequestMapping(path = "filmId.do", method =RequestMethod.POST)
 	public String createFilm(Model model, Film film) {
 		Film createdFilm = filmDao.createFilm(film);
-		if (film != null) {
+		if (createdFilm != null) {
 			model.addAttribute(createdFilm);
 			return "filmID";
 		} else {
