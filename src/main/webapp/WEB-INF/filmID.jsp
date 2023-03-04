@@ -31,13 +31,10 @@
 					<td>${film.releaseYear}</td>
 				</tr>
 				<tr>
-					<th>Language</th>
-					<td>${film.language}</td>
+					<th>Language ID</th>
+					<td>${film.languageId}</td>
 				</tr>
-				<tr>
-					<th>Category</th>
-					<td>${film.category}</td>
-				</tr>
+				
 				<tr>
 					<th>Rating</th>
 					<td>${film.rating}</td>
@@ -48,7 +45,7 @@
 				</tr>
 				<tr>
 					<th>Length</th>
-					<td>${film.length}minutes</td>
+					<td>${film.length} minutes</td>
 				</tr>
 				<tr>
 					<th>Special Features</th>
