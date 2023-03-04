@@ -13,3 +13,6 @@ th {
 body{
 	background-color: #d1f0c7;
 }
+input[type="number"]{
+	width:200px;
+}
