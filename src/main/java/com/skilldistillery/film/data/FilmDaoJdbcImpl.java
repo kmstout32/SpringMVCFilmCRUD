@@ -73,10 +73,12 @@ public class FilmDaoJdbcImpl implements FilmDAO {
 	}
 
 	@Override
-	public Film findFilmById(int filmId) throws SQLException {
+	public Film findFilmById(int filmId)  {
 		Film film = null;
 		List<Actor> actors = new ArrayList<>();
-		Connection conn = DriverManager.getConnection(URL, user, pass);
+		try {
+		Connection conn;
+			conn = DriverManager.getConnection(URL, user, pass);
 		String sql = "SELECT film.id, title ,description ,category.name ,release_year , language_id,language.name , rental_duration, rental_rate,length ,";
 		sql += " replacement_cost, rating,special_features  FROM film JOIN language ON language.id=language_id JOIN film_category ON film.id = film_id JOIN category ON category.id = category_id WHERE film.id = ?";
 		PreparedStatement stmt = conn.prepareStatement(sql);
@@ -102,14 +104,20 @@ public class FilmDaoJdbcImpl implements FilmDAO {
 			film.setActorList(actors);
 
 		}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return film;
 	}
 
 	@Override
-	public Actor findActorById(int actorId) throws SQLException {
+	public Actor findActorById(int actorId) {
 		Actor actor = null;
 
-		Connection conn = DriverManager.getConnection(URL, user, pass);
+		try {
+		Connection conn;
+			conn = DriverManager.getConnection(URL, user, pass);
 		String sql = "SELECT id, first_name, last_name FROM actor WHERE id = ?";
 		PreparedStatement stmt = conn.prepareStatement(sql);
 		stmt.setInt(1, actorId);
@@ -122,6 +130,10 @@ public class FilmDaoJdbcImpl implements FilmDAO {
 			actor.setLastName(actorResult.getString("last_name"));
 		}
 
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return actor;
 	}
 

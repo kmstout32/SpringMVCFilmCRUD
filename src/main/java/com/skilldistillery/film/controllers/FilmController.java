@@ -15,11 +15,18 @@ public class FilmController {
 @Autowired
  private FilmDAO filmDao;
 
-@RequestMapping(path = {"/","home.do"})
-public String goHome(Model model) throws SQLException {
-	Film TEST =  filmDao.findFilmById(1);
-	model.addAttribute("TESTFILM",TEST);
-	return "home";
+//@RequestMapping(path = {"/","home.do"})
+//public String goHome(Model model) throws SQLException {
+//	Film TEST =  filmDao.findFilmById(1);
+//	model.addAttribute("TESTFILM",TEST);
+//	return "home";
+//}
+@RequestMapping(path = {"filmId.do"})
+public String findByFilmID(Model model,Integer id)  {
+	Film film =  filmDao.findFilmById(id);
+	model.addAttribute(film);
+	
+	return "filmID";
 }
 
 static {
