@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 
 import com.skilldistillery.film.entities.Actor;
 import com.skilldistillery.film.entities.Film;
+
 @Component
 public class FilmDaoJdbcImpl implements FilmDAO {
 	private static final String URL = "jdbc:mysql://localhost:3306/sdvid?useSSL=false&useLegacyDatetimeCode=false&serverTimezone=US/Mountain";
@@ -73,37 +74,37 @@ public class FilmDaoJdbcImpl implements FilmDAO {
 	}
 
 	@Override
-	public Film findFilmById(int filmId)  {
+	public Film findFilmById(int filmId) {
 		Film film = null;
 		List<Actor> actors = new ArrayList<>();
 		try {
-		Connection conn;
+			Connection conn;
 			conn = DriverManager.getConnection(URL, user, pass);
-		String sql = "SELECT film.id, title ,description ,category.name ,release_year , language_id,language.name , rental_duration, rental_rate,length ,";
-		sql += " replacement_cost, rating,special_features  FROM film JOIN language ON language.id=language_id JOIN film_category ON film.id = film_id JOIN category ON category.id = category_id WHERE film.id = ?";
-		PreparedStatement stmt = conn.prepareStatement(sql);
-		stmt.setInt(1, filmId);
-		ResultSet filmResult = stmt.executeQuery();
-		if (filmResult.next()) {
-			film = new Film(); // Create the object
-			// Here is our mapping of query columns to our object fields:
-			film.setId(filmResult.getInt("id"));
-			film.setTitle(filmResult.getString("title"));
-			film.setDescription(filmResult.getString("description"));
-			film.setReleaseYear(filmResult.getInt("release_year"));
-			film.setLanguageId(filmResult.getInt("language_id"));
-			film.setRentalDuration(filmResult.getInt("rental_duration"));
-			film.setRentalRate(filmResult.getDouble("rental_rate"));
-			film.setLength(filmResult.getInt("length"));
-			film.setReplacementCost(filmResult.getDouble("replacement_cost"));
-			film.setRating(filmResult.getString("rating"));
-			film.setSpecialFeature(filmResult.getString("special_features"));
-			film.setLanguage(filmResult.getString("language.name"));
-			film.setCategory(filmResult.getString("category.name"));
-			actors = findActorsByFilmId(film.getId());
-			film.setActorList(actors);
+			String sql = "SELECT film.id, title ,description ,category.name ,release_year , language_id,language.name , rental_duration, rental_rate,length ,";
+			sql += " replacement_cost, rating,special_features  FROM film JOIN language ON language.id=language_id JOIN film_category ON film.id = film_id JOIN category ON category.id = category_id WHERE film.id = ?";
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, filmId);
+			ResultSet filmResult = stmt.executeQuery();
+			if (filmResult.next()) {
+				film = new Film(); // Create the object
+				// Here is our mapping of query columns to our object fields:
+				film.setId(filmResult.getInt("id"));
+				film.setTitle(filmResult.getString("title"));
+				film.setDescription(filmResult.getString("description"));
+				film.setReleaseYear(filmResult.getInt("release_year"));
+				film.setLanguageId(filmResult.getInt("language_id"));
+				film.setRentalDuration(filmResult.getInt("rental_duration"));
+				film.setRentalRate(filmResult.getDouble("rental_rate"));
+				film.setLength(filmResult.getInt("length"));
+				film.setReplacementCost(filmResult.getDouble("replacement_cost"));
+				film.setRating(filmResult.getString("rating"));
+				film.setSpecialFeature(filmResult.getString("special_features"));
+				film.setLanguage(filmResult.getString("language.name"));
+				film.setCategory(filmResult.getString("category.name"));
+				actors = findActorsByFilmId(film.getId());
+				film.setActorList(actors);
 
-		}
+			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -116,19 +117,19 @@ public class FilmDaoJdbcImpl implements FilmDAO {
 		Actor actor = null;
 
 		try {
-		Connection conn;
+			Connection conn;
 			conn = DriverManager.getConnection(URL, user, pass);
-		String sql = "SELECT id, first_name, last_name FROM actor WHERE id = ?";
-		PreparedStatement stmt = conn.prepareStatement(sql);
-		stmt.setInt(1, actorId);
-		ResultSet actorResult = stmt.executeQuery();
-		if (actorResult.next()) {
-			actor = new Actor(); // Create the object
-			// Here is our mapping of query columns to our object fields:
-			actor.setId(actorResult.getInt("id"));
-			actor.setFirstName(actorResult.getString("first_name"));
-			actor.setLastName(actorResult.getString("last_name"));
-		}
+			String sql = "SELECT id, first_name, last_name FROM actor WHERE id = ?";
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, actorId);
+			ResultSet actorResult = stmt.executeQuery();
+			if (actorResult.next()) {
+				actor = new Actor(); // Create the object
+				// Here is our mapping of query columns to our object fields:
+				actor.setId(actorResult.getInt("id"));
+				actor.setFirstName(actorResult.getString("first_name"));
+				actor.setLastName(actorResult.getString("last_name"));
+			}
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -294,7 +295,7 @@ public class FilmDaoJdbcImpl implements FilmDAO {
 	public boolean deleteActor(Actor actor) {
 		Connection conn = null;
 		try {
-			
+
 			conn = DriverManager.getConnection(URL, user, pass);
 			conn.setAutoCommit(false); // START TRANSACTION
 			String sql = "DELETE FROM film_actor WHERE actor_id = ?";
@@ -320,14 +321,48 @@ public class FilmDaoJdbcImpl implements FilmDAO {
 		return true;
 	}
 
-
-
-
-
 	@Override
 	public Film createFilm(Film film) {
+		Connection conn = null;
+		try {
+			conn = DriverManager.getConnection(URL, user, pass);
+			conn.setAutoCommit(false); // START TRANSACTION
+			String sql = "INSERT INTO film (title, description, release_year, language_id, rental_duration, rental_rate, length, replacement_cost, rating, special_features) \n"
+					+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+			PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+			stmt.setString(1, film.getTitle());
+			stmt.setString(2, film.getDescription());
+			stmt.setInt(3, film.getReleaseYear());
+			stmt.setInt(4, film.getLanguageId());
+			stmt.setInt(5, film.getRentalDuration());
+			stmt.setDouble(6, film.getRentalRate());
+			stmt.setInt(7, film.getLength());
+			stmt.setDouble(8, film.getReplacementCost());
+			stmt.setString(9, film.getRating());
+			stmt.setString(10, film.getSpecialFeature());
+			int updateCount = stmt.executeUpdate();
+			conn.commit();
+			if (updateCount == 1) {
+				ResultSet keys = stmt.getGeneratedKeys();
+				if (keys.next()) {
+					int newFilmId = keys.getInt(1);
+					film.setId(newFilmId);
 
-		return null;
+				}
+			}
+
+			if (conn != null) {
+				try {
+					conn.rollback();
+				} catch (SQLException sqle2) {
+					System.err.println("Error trying to rollback");
+				}
+			}
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return film;
+
 	}
 
 	@Override
@@ -341,6 +376,7 @@ public class FilmDaoJdbcImpl implements FilmDAO {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
 	static {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
@@ -350,6 +386,7 @@ public class FilmDaoJdbcImpl implements FilmDAO {
 			throw new RuntimeException("Unable to load MySQL Driver class");
 		}
 	}
+
 	@Override
 	public List<Film> findFilmByActorId(int filmId) {
 		// TODO Auto-generated method stub
