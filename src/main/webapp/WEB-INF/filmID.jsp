@@ -56,11 +56,7 @@
 				</tr>
 			</table>
 		</c:when>
-		<c:otherwise>
-			<div class="alert alert-danger" role="alert">
-            <p>No film found with the given ID.</p>
-           </div>
-		</c:otherwise>
+		
 	</c:choose>
 </body>
 </html>
