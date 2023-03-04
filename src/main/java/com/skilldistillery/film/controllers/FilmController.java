@@ -33,17 +33,12 @@ public class FilmController {
 
 	}
 
-//	@RequestMapping(path = { "film.do" })
-//	public String createFilm(Model model, Film film) {
-//		Film filmCreate = new Film (0, "fdsa", "fdsa", 1996, 5, 6, 2.6, 5, 9.9, "G", "Trailers");
-//		Film filmCreated = filmDao.createFilm(filmCreate);
-//		model.addAttribute(filmCreated);
-//		return "filmID";
-//	}
 	@RequestMapping(path = { "film.do" })
 	public String createFilm(Model model, Film film) {
-		Film filmCreated = filmDao.createFilm();
+		Film filmCreate = new Film (0, "fdsa", "fdsa", 1996, 5, 6, 2.6, 5, 9.9, "G", "Trailers");
+		Film filmCreated = filmDao.createFilm(filmCreate);
 		model.addAttribute(filmCreated);
 		return "filmID";
 	}
+
 }
