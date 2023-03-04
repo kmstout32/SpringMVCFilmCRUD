@@ -16,7 +16,7 @@
 </head>
 <body>
 	<c:choose>
-		<c:when test="${! empty film}">
+		<c:when test="${not empty film}">
 			<table>
 				<tr>
 					<th>Title</th>
@@ -57,7 +57,9 @@
 			</table>
 		</c:when>
 		<c:otherwise>
-			<p>No film found</p>
+			<div class="alert alert-danger" role="alert">
+            <p>No film found with the given ID.</p>
+           </div>
 		</c:otherwise>
 	</c:choose>
 </body>

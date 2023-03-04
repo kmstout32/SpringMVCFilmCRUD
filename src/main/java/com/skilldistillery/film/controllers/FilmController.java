@@ -24,18 +24,15 @@ public class FilmController {
 @RequestMapping(path = {"filmId.do"})
 public String findByFilmID(Model model,Integer id)  {
 	Film film =  filmDao.findFilmById(id);
+	if(film != null) {
 	model.addAttribute(film);
-	
 	return "filmID";
+	}else {
+		return "error";
+	}
+	
+	
 }
 
-static {
-	try {
-		Class.forName("com.mysql.cj.jdbc.Driver");
-	} catch (ClassNotFoundException e) {
-		e.printStackTrace();
-		System.err.println("Error loading MySQL Driver");
-		throw new RuntimeException("Unable to load MySQL Driver class");
-	}
-}
+
 }
