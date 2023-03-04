@@ -12,6 +12,8 @@
 <h4>Please choose an option</h4>
 <ul>
 <li><a href="findFilmByID.html">Find a film by the Film's ID</a></li>
+<li><a href="addAFilm.html">Add a film to the Database</a></li>
+
 </ul>
 </body>
 </html>
