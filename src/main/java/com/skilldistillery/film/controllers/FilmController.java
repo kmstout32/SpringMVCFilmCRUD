@@ -66,11 +66,11 @@ public class FilmController {
 
 	@RequestMapping(path = "deleteFilm.do", method = RequestMethod.POST)
 	public String deleteFilm(Integer id, Model model) {
-	    boolean filmDeleted = filmDao.deleteFilm(filmDao.findFilmById(id));
+	    boolean filmDeleted = filmDao.deleteFilm(id);
 	    if (filmDeleted) {
-	        model.addAttribute("message", "Film successfully deleted");
+	        model.addAttribute("message", "Film with ID " + id + " deleted successfully.");
 	    } else {
-	        model.addAttribute("message", "Failed to delete film");
+	    	model.addAttribute("message", "Failed to delete film with ID " + id+ ".");
 	    }
 	    return "deleteFilm";
 	}
