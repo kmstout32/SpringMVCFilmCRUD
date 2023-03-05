@@ -4,10 +4,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Delete Film Result</title>
+<title>Insert title here</title>
 </head>
 <body>
-<h1>Delete Film Result</h1>
-<p>${message}</p>
+${films}
 </body>
 </html>

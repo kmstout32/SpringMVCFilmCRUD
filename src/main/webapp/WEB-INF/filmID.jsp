@@ -34,7 +34,7 @@
 					<th>Language ID</th>
 					<td>${film.languageId}</td>
 				</tr>
-				
+
 				<tr>
 					<th>Rating</th>
 					<td>${film.rating}</td>
@@ -45,7 +45,7 @@
 				</tr>
 				<tr>
 					<th>Length</th>
-					<td>${film.length} minutes</td>
+					<td>${film.length}minutes</td>
 				</tr>
 				<tr>
 					<th>Special Features</th>
@@ -58,5 +58,6 @@
 	<form action="home.do">
 		<input type="submit" value="Return Home">
 	</form>
+	
 </body>
 </html>

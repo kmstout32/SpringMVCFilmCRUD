@@ -8,6 +8,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.skilldistillery.film.data.FilmDAO;
 import com.skilldistillery.film.data.FilmDaoJdbcImpl;
@@ -61,13 +63,21 @@ public class FilmController {
 
 	}
 	
-	@RequestMapping(path = "deleteFilm.do", method =RequestMethod.POST)
-	public String deleteFilm(Model model, Film film) {
-		boolean result  = filmDao.deleteFilm(film);
-		return "deleteFilm";
-		
+
+	@RequestMapping(path = "deleteFilm.do", method = RequestMethod.POST)
+	public String deleteFilm(Integer id, Model model) {
+	    boolean filmDeleted = filmDao.deleteFilm(filmDao.findFilmById(id));
+	    if (filmDeleted) {
+	        model.addAttribute("message", "Film successfully deleted");
+	    } else {
+	        model.addAttribute("message", "Failed to delete film");
+	    }
+	    return "deleteFilm";
 	}
-	@RequestMapping(path = "keywordFilm.do", params="keyword", method =RequestMethod.POST)
+
+
+
+	@RequestMapping(path = "keywordFilm.do", method =RequestMethod.POST)
 	public String searchFilmByKeyword(Model model, String keyword) {
 		List<Film> films  = filmDao.searchFilmByKeyWord(keyword) ;
 		if(films != null) {
@@ -78,6 +88,7 @@ public class FilmController {
 		}
 		
 	}
+
 	
 	
 	
