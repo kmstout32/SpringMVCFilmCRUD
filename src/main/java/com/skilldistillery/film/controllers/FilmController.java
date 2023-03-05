@@ -63,16 +63,6 @@ public class FilmController {
 
 	}
 
-	@RequestMapping(path = "deleteFilm.do", method = RequestMethod.POST)
-	public String deleteFilm(Integer id, Model model) {
-		boolean filmDeleted = filmDao.deleteFilm(id);
-		if (filmDeleted) {
-			model.addAttribute("message", "Film with ID " + id + " deleted successfully.");
-		} else {
-			model.addAttribute("message", "Failed to delete film with ID " + id + ".");
-		}
-		return "deleteFilm";
-	}
 
 	@RequestMapping(path = "keywordFilm.do", method = RequestMethod.GET)
 	public String searchFilmByKeyword(Model model, String keyword) {
@@ -85,23 +75,29 @@ public class FilmController {
 		}
 
 	}
-
-	@RequestMapping(path = "edit.do", method = RequestMethod.GET)
-	public String editAFilm(Model model, Integer id,Film film) {
-		
-		return "edit";
-
+	@RequestMapping(path = "deleteFilm.do", method = RequestMethod.POST)
+	public String deleteFilm(Integer id, Model model) {
+		boolean filmDeleted = filmDao.deleteFilm(id);
+		if (filmDeleted) {
+			model.addAttribute("message", "Film with ID " + id + " deleted successfully.");
+		} else {
+			model.addAttribute("message", "Failed to delete film with ID " + id + ".");
+		}
+		return "deleteFilm";
 	}
+
+//	@RequestMapping(path = "edit.do", method = RequestMethod.GET)
+//	public String editAFilm(Model model, Integer id,Film film) {
+//		
+//		return "edit";
+//
+//	}
 
 	@RequestMapping(path = "updateFilm.do", method = RequestMethod.POST)
 	public String updateFilm(Model model, Integer id, Film film) {
-		film = filmDao.findFilmById(id);
-		boolean filmUpdated = filmDao.updateFilm(id, film);
-		if (filmUpdated) {
-			model.addAttribute("film", film);
-		} else {
-			model.addAttribute("message", "Failed to update film with ID " + id + ".");
-		}
+		film=filmDao.findFilmById(id);
+		model.addAttribute("film",film);
+		boolean updatedFilm = filmDao.updateFilm(film);
 		return "updateFilm";
 
 	}

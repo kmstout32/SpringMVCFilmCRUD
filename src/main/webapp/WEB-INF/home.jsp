@@ -25,9 +25,8 @@
 							a film</a></li>
 					<li class="list-group-item"><a href="findFilmByKeyword.html">Search
 							films by keyword</a></li>
-					<li class="list-group-item">
-						
-					</li>
+					
+					
 				</ul>
 			</div>
 		</div>

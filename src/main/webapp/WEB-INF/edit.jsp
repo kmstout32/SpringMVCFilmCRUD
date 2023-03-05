@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>  
-    
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,7 +12,7 @@
 </head>
 <body>
 	
-<form:form method="POST" action="updateFilm.do">
+<form:form method="POST" action="updateFilm.do" modelAttribute="film">
 
 <label for="id">ID</label>
 <form:input id="id" name="id"
@@ -20,7 +20,7 @@
 
 <label for="title">Title</label>
 <form:input id="title" name="title"
-			type="text" path="title"></form:input>
+			type="text" path="title" default="${film.title } placeholder="${film.title }"></form:input>
 
 <label for="release_year">Release Year</label>
 <form:input id="release_year" name="release_year"
@@ -57,11 +57,6 @@
 <label for="description">Description</label>
 <form:input id="description" name="description"
 			type="text" path="description"></form:input>
-
-
-
-
-
 
 
 </form:form>

@@ -10,7 +10,7 @@
 </head>
 <body class="text-center">
 	${film}
-	${message }
+
 	<form action="home.do">
 		<input type="submit" value="Return Home">
 	</form>
