@@ -16,80 +16,20 @@
                 
                
                     <c:forEach var="film" items="${film}">
-                       <c:if test="${not empty film}">
-		<table>
-			<c:if test="${not empty film.title}">
-				<tr>
-					<th>Title</th>
-					<td>${film.title}</td>
-				</tr>
-			</c:if>
-			<c:if test="${not empty film.description}">
-				<tr>
-					<th>Description</th>
-					<td>${film.description}</td>
-				</tr>
-			</c:if>
-			<c:if test="${not empty film.releaseYear}">
-				<tr>
-					<th>Release Year</th>
-					<td>${film.releaseYear}</td>
-				</tr>
-			</c:if>
-			<c:if test="${not empty film.languageId}">
-				<tr>
-					<th>Language ID</th>
-					<td>${film.languageId}</td>
-				</tr>
-			</c:if>
-
-			<c:if test="${not empty film.rating}">
-				<tr>
-					<th>Rating</th>
-					<td>${film.rating}</td>
-				</tr>
-			</c:if>
-			<c:if test="${not empty film.rentalRate}">
-				<tr>
-					<th>Rental Rate</th>
-					<td>${film.rentalRate}</td>
-				</tr>
-			</c:if>
-			<c:if test="${not empty film.length}">
-				<tr>
-					<th>Length</th>
-					<td>${film.length} <span>minutes</span> </td>
-				</tr>
-			</c:if>
-			<c:if test="${not empty film.specialFeature}">
-				<tr>
-					<th>Special Features</th>
-					<td>${film.specialFeature}</td>
-				</tr>
-			</c:if>
-			<c:if test="${not empty film.actorList}">
-				<tr>
-					<th>Actors</th>
-					<td>
-						<ul>
-							<c:forEach items="${film.actorList}" var="actor">
-
-								<li>${actor.firstName}${actor.lastName}</li>
-
-							</c:forEach>
-						</ul>
-					</td>
-				</tr>
-			</c:if>
-			<c:if test="${not empty film.category}">
-				<tr>
-					<th>Category</th>
-					<td>${film.category}</td>
-				</tr>
-			</c:if>
-		</table>
-	</c:if>
-
+                        <tr>
+                            <td>${film.id}</td>
+                            <td>${film.title}</td>
+                            <td>${film.description}</td>
+                            <td>${film.releaseYear}</td>
+                            <td>${film.language}</td>
+                            <td>${film.rentalDuration}</td>
+                            <td>${film.rentalRate}</td>
+                            <td>${film.length}</td>
+                            <td>${film.replacementCost}</td>
+                            <td>${film.rating}</td>
+                            <td>${film.specialFeature}</td>
+                            <td>${film.category}</td>
+                        </tr>
                     </c:forEach>
               
             </table>
