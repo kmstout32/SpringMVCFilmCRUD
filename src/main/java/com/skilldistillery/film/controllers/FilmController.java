@@ -86,10 +86,9 @@ public class FilmController {
 
 	}
 
-	@RequestMapping(path = "edit.do", method = RequestMethod.POST)
+	@RequestMapping(path = "edit.do", method = RequestMethod.GET)
 	public String editAFilm(Model model, Integer id,Film film) {
-		film = filmDao.findFilmById(id);
-		model.addAttribute("film",film);
+		
 		return "edit";
 
 	}

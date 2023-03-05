@@ -17,7 +17,7 @@
                     <li class="list-group-item"><a href="addAFilm.html">Add a film to the database</a></li>
                     <li class="list-group-item"><a href="deleteFilm.html">Delete a film</a></li>
                     <li class="list-group-item"><a href="findFilmByKeyword.html">Search films by keyword</a></li>
-                    <li class="list-group-item"><a href="updateFilm.html">Update film</a></li>
+                    <li class="list-group-item"><a href="edit.do">Update film</a></li>
                 </ul>
             </div>
         </div>
