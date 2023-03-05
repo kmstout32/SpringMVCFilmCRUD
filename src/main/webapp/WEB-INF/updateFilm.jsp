@@ -9,13 +9,30 @@
 <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body class="text-center">
-	<form action="updateFilm.do" method="post">
-		<input type="hidden" name="id" placeholder=${film.id }value="${film.id }">
-		<label>Title</label>
-		<input type="text" name="title" value="${film.title }">
-		
-		<input type="submit" value="update Film">
-	</form>
+	<%@page contentType="text/html" pageEncoding="UTF-8"%>
 
+<body>
+	<h1>Update Film</h1>
+	<form method="post" action="updateFilm.do">
+		<input type="hidden" name="id" value="${film.id}" />
+		<label for="title">Title:</label>
+		<input type="text" name="title" value="${film.title}" /><br>
+		<label for="description">Description:</label>
+		<textarea name="description">${film.description}</textarea><br>
+		<label for="releaseYear">Release Year:</label>
+		<input type="text" name="releaseYear" value="${film.releaseYear}" /><br>
+		<label for="rentalRate">Rental Rate:</label>
+		<input type="text" name="rentalRate" value="${film.rentalRate}" /><br>
+		<label for="length">Length:</label>
+		<input type="text" name="length" value="${film.length}" /><br>
+		<label for="rating">Rating:</label>
+		<input type="text" name="rating" value="${film.rating}" /><br>
+		<label for="specialFeature">Special Feature:</label>
+		<input type="text" name="specialFeature" value="${film.specialFeature}" /><br>
+		<input type="submit" value="Update Film" />
+	</form>
 </body>
 </html>
+	
+
+
