@@ -19,7 +19,7 @@
 
 <body>
 	<h1>Update Film</h1>
-	<form method="post" action="updateFilm.do">
+	<form method="post" action="filmId.do">
 		<input type="hidden" name="id" value="${film.id}" />
 		<label for="title">Title:</label>
 		<input type="text" name="title" value="${film.title}" /><br>
