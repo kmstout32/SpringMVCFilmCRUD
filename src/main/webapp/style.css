@@ -16,3 +16,7 @@ body{
 input[type="number"]{
 	width:200px;
 }
+#description{
+    height:200px;
+    font-size:14pt;
+}
