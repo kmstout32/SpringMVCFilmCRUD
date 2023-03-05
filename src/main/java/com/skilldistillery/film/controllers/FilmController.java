@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.skilldistillery.film.data.FilmDAO;
-import com.skilldistillery.film.data.FilmDaoJdbcImpl;
+
 import com.skilldistillery.film.entities.Film;
 
 @Controller
@@ -30,7 +30,7 @@ public class FilmController {
 	public String findByFilmID(Model model, Integer id) {
 		Film film = filmDao.findFilmById(id);
 		if (film != null) {
-			model.addAttribute(film);
+			model.addAttribute("film",film);
 			return "filmID";
 		} else {
 			return "error";
