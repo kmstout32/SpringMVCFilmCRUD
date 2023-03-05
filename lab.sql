@@ -1,0 +1,1 @@
+SELECT id, title, description,category.name, release_year, language_id,language.name, rental_duration, rental_rate, length, replacement_cost, rating,special_features FROM film JOIN language ON language.id=language_id JOIN film_category ON film.id = film_id JOIN category ON category.id = category_id WHERE id = 1;

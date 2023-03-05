@@ -76,14 +76,14 @@ public class FilmDaoJdbcImpl implements FilmDAO {
 	@Override
 	public Film findFilmById(int filmId) {
 		Film film = null;
-
+		if(filmId <= 1000) {
 		List<Actor> actors = new ArrayList<>();
 		try {
 			Connection conn;
+			//	String sql =  rental_duration, rental_rate,length ,";
+			//sql += " replacement_cost, rating,special_features  FROM film JOIN language ON language.id=language_id JOIN film_category ON film.id = film_id JOIN category ON category.id = category_id WHERE film.id = ?";
 			conn = DriverManager.getConnection(URL, user, pass);
-			String sql = "SELECT id, title, description, release_year,"
-					+ "language_id, rental_duration, rental_rate, length, replacement_cost, rating,"
-					+ "special_features FROM film WHERE id = ?";
+			String sql = "SELECT film.id, title, description,category.name, release_year, language_id,language.name, rental_duration, rental_rate, length, replacement_cost, rating,special_features FROM film JOIN language ON language.id=language_id JOIN film_category ON film.id = film_id JOIN category ON category.id = category_id WHERE film.id = ?";
 
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			stmt.setInt(1, filmId);
@@ -113,8 +113,50 @@ public class FilmDaoJdbcImpl implements FilmDAO {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}}
+		else {
+
+				Film film1 = null;
+
+				String sql = "SELECT id, title, description, release_year,"
+						+ "language_id, rental_duration, rental_rate, length, replacement_cost, rating,"
+						+ "special_features FROM film WHERE id = ?";
+
+				Connection conn;
+				try {
+					conn = DriverManager.getConnection(URL, user, pass);
+					PreparedStatement stmt = conn.prepareStatement(sql);
+
+					stmt.setInt(1, filmId);
+					ResultSet filmResult = stmt.executeQuery();
+
+					if (filmResult.next()) {
+						film = new Film();
+
+						film.setId(filmResult.getInt("id"));
+						film.setTitle(filmResult.getString("title"));
+						film.setDescription(filmResult.getString("description"));
+						film.setReleaseYear(filmResult.getInt("release_year"));
+						film.setLanguage(filmResult.getString("language_id"));
+						film.setRentalDuration(filmResult.getInt("rental_duration"));
+						film.setRentalRate(filmResult.getDouble("rental_rate"));
+						film.setLength(filmResult.getInt("length"));
+						film.setReplacementCost(filmResult.getDouble("replacement_cost"));
+						film.setRating(filmResult.getString("rating"));
+						film.setSpecialFeature(filmResult.getString("special_features"));
+					}
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+
+					e.printStackTrace();
+
+				}
+
+				
+
+			}
 		return film;
+	
 	}
 
 	public List<Film> displayFilms() {
