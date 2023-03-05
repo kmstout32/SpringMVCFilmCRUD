@@ -250,7 +250,6 @@ public class FilmDaoJdbcImpl implements FilmDAO {
 			e.printStackTrace();
 		}
 		return actorList;
-
 	}
 
 	public List<Film> findFilmsByActorId(int actorId) {

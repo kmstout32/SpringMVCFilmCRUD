@@ -18,56 +18,75 @@
 
 	<c:if test="${not empty film}">
 		<table>
-			<tr>
-				<th>Title</th>
-				<td>${film.title}</td>
-			</tr>
-			<tr>
-				<th>Description</th>
-				<td>${film.description}</td>
-			</tr>
-			<tr>
-				<th>Release Year</th>
-				<td>${film.releaseYear}</td>
-			</tr>
-			<tr>
-				<th>Language ID</th>
-				<td>${film.languageId}</td>
-			</tr>
+			<c:if test="${not empty film.title}">
+				<tr>
+					<th>Title</th>
+					<td>${film.title}</td>
+				</tr>
+			</c:if>
+			<c:if test="${not empty film.description}">
+				<tr>
+					<th>Description</th>
+					<td>${film.description}</td>
+				</tr>
+			</c:if>
+			<c:if test="${not empty film.releaseYear}">
+				<tr>
+					<th>Release Year</th>
+					<td>${film.releaseYear}</td>
+				</tr>
+			</c:if>
+			<c:if test="${not empty film.languageId}">
+				<tr>
+					<th>Language ID</th>
+					<td>${film.languageId}</td>
+				</tr>
+			</c:if>
 
-			<tr>
-				<th>Rating</th>
-				<td>${film.rating}</td>
-			</tr>
-			<tr>
-				<th>Rental Rate</th>
-				<td>${film.rentalRate}</td>
-			</tr>
-			<tr>
-				<th>Length</th>
-				<td>${film.length} minutes</td>
-			</tr>
-			<tr>
-				<th>Special Features</th>
-				<td>${film.specialFeature}</td>
-			</tr>
-			<tr>
-				<th>Actors</th>
-				<td>
-					<ul>
-						<c:forEach items="${film.actorList}" var="actor">
+			<c:if test="${not empty film.rating}">
+				<tr>
+					<th>Rating</th>
+					<td>${film.rating}</td>
+				</tr>
+			</c:if>
+			<c:if test="${not empty film.rentalRate}">
+				<tr>
+					<th>Rental Rate</th>
+					<td>${film.rentalRate}</td>
+				</tr>
+			</c:if>
+			<c:if test="${not empty film.length}">
+				<tr>
+					<th>Length</th>
+					<td>${film.length} <span>minutes</span> </td>
+				</tr>
+			</c:if>
+			<c:if test="${not empty film.specialFeature}">
+				<tr>
+					<th>Special Features</th>
+					<td>${film.specialFeature}</td>
+				</tr>
+			</c:if>
+			<c:if test="${not empty film.actorList}">
+				<tr>
+					<th>Actors</th>
+					<td>
+						<ul>
+							<c:forEach items="${film.actorList}" var="actor">
 
-							<li>${actor.firstName} ${actor.lastName}</li>
+								<li>${actor.firstName}${actor.lastName}</li>
 
-						</c:forEach>
-					</ul>
-				</td>
-			</tr>
-			<tr>
-				<th>Category</th>
-				<td>${film.category}</td>
-			</tr>
-			<tr>
+							</c:forEach>
+						</ul>
+					</td>
+				</tr>
+			</c:if>
+			<c:if test="${not empty film.category}">
+				<tr>
+					<th>Category</th>
+					<td>${film.category}</td>
+				</tr>
+			</c:if>
 		</table>
 	</c:if>
 
@@ -78,3 +97,4 @@
 
 </body>
 </html>
+
