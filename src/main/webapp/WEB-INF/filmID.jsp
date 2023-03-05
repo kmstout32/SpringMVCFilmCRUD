@@ -94,6 +94,9 @@
 	<form action="home.do">
 		<input type="submit" value="Return Home">
 	</form>
+	<form action="deleteFilm.do" method="POST">
+		<input type="submit" value="Delete">
+	</form>
 
 </body>
 </html>
