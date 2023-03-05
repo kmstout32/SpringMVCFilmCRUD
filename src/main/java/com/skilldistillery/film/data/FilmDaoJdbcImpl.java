@@ -81,8 +81,10 @@ public class FilmDaoJdbcImpl implements FilmDAO {
 		try {
 			Connection conn;
 			conn = DriverManager.getConnection(URL, user, pass);
-			String sql = "SELECT film.id, title ,description ,category.name ,release_year , language_id,language.name , rental_duration, rental_rate,length ,";
-			sql += " replacement_cost, rating,special_features  FROM film JOIN language ON language.id=language_id JOIN film_category ON film.id = film_id JOIN category ON category.id = category_id WHERE film.id = ?";
+			String sql = "SELECT id, title, description, release_year,"
+					+ "language_id, rental_duration, rental_rate, length, replacement_cost, rating,"
+					+ "special_features FROM film WHERE id = ?";
+
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			stmt.setInt(1, filmId);
 			ResultSet filmResult = stmt.executeQuery();
@@ -262,7 +264,7 @@ public class FilmDaoJdbcImpl implements FilmDAO {
 
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
-				Integer filmId = rs.getInt("id");
+				Integer filmId = rs.getInt("film.id");
 				String title = rs.getString("title");
 				String desc = rs.getString("description");
 				Integer releaseYear = rs.getInt("release_year");
@@ -473,41 +475,41 @@ public class FilmDaoJdbcImpl implements FilmDAO {
 		return null;
 	}
 
-	@Override
-	public List<Film> searchFilmByKeyWord(String keyword) {
-		List<Film> films = new ArrayList<>();
-		List<Actor> actors;
-
-		String sql = "SELECT film.*, lang.name " + "FROM film JOIN language lang " + "ON lang.id = film.language_id "
-				+ "WHERE title LIKE ? OR  description LIKE ?";
-		try {
-			Connection conn;
-			conn = DriverManager.getConnection(URL, user, pass);
-			PreparedStatement stmt = conn.prepareStatement(sql);
-			stmt.setString(1, "%" + keyword + "%");
-			stmt.setString(2, "%" + keyword + "%");
-			ResultSet rs = stmt.executeQuery();
-
-			while (rs.next()) {
-				String title = rs.getString("title");
-				String desc = rs.getString("description");
-				Integer releaseYear = rs.getInt("release_year");
-				String lang = rs.getString("name");
-				Integer id = rs.getInt("id");
-
-				Film film = new Film(title, desc, releaseYear, lang);
-				film.setId(id);
-				films.add(film);
-			}
-			rs.close();
-			stmt.close();
-			conn.close();
-
-		} catch (Exception e) {
-			e.printStackTrace();
-
-		}
-		return films;
-	}
+//	@Override
+//	public List<Film> searchFilmByKeyWord(String keyword) {
+//		List<Film> films = new ArrayList<>();
+//		List<Actor> actors;
+//
+//		String sql = "SELECT film.*, lang.name " + "FROM film JOIN language lang " + "ON lang.id = film.language_id "
+//				+ "WHERE title LIKE ? OR  description LIKE ?";
+//		try {
+//			Connection conn;
+//			conn = DriverManager.getConnection(URL, user, pass);
+//			PreparedStatement stmt = conn.prepareStatement(sql);
+//			stmt.setString(1, "%" + keyword + "%");
+//			stmt.setString(2, "%" + keyword + "%");
+//			ResultSet rs = stmt.executeQuery();
+//
+//			while (rs.next()) {
+//				String title = rs.getString("title");
+//				String desc = rs.getString("description");
+//				Integer releaseYear = rs.getInt("release_year");
+//				String lang = rs.getString("name");
+//				Integer id = rs.getInt("id");
+//
+//				Film film = new Film(title, desc, releaseYear, lang);
+//				film.setId(id);
+//				films.add(film);
+//			}
+//			rs.close();
+//			stmt.close();
+//			conn.close();
+//
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//
+//		}
+//		return films;
+//	}
 
 }
