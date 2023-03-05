@@ -98,7 +98,7 @@ public class FilmController {
 		film = filmDao.findFilmById(id);
 		boolean filmUpdated = filmDao.updateFilm(id, film);
 		if (filmUpdated) {
-			model.addAttribute("message", "Film with ID " + id + " Updated successfully.");
+			model.addAttribute("film", film);
 		} else {
 			model.addAttribute("message", "Failed to update film with ID " + id + ".");
 		}

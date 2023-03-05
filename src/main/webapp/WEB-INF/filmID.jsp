@@ -22,6 +22,16 @@
 				<tr>
 					<th>Title</th>
 					<td>${film.title}</td>
+					<td><form action="updateFilm.do" method="POST">
+							<div class="input-group">
+								<input type="text" name="title" class="form-control"
+									placeholder="Enter film Title">
+								<div class="input-group-append">
+									<button class="btn btn-primary" type="submit">Update
+										Title</button>
+								</div>
+							</div>
+						</form></td>
 				</tr>
 			</c:if>
 			<c:if test="${not empty film.description}">
@@ -97,6 +107,7 @@
 	<form action="deleteFilm.do" method="POST">
 		<input type="submit" value="Delete">
 	</form>
+
 
 </body>
 </html>

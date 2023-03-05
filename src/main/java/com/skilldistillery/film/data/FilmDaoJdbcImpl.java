@@ -495,7 +495,7 @@ public class FilmDaoJdbcImpl implements FilmDAO {
 	}
 
 	@Override
-	public boolean updateFilm(Integer filmId,Film film) {
+	public boolean updateFilm(Integer id, Film film) {
 		
 	    Connection conn = null;
 	    PreparedStatement stmt = null;
