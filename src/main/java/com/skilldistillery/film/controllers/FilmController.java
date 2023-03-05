@@ -90,8 +90,14 @@ public class FilmController {
 
 	}
 	@RequestMapping(path = "updateFilm.do", method= RequestMethod.POST)
-	public String updateFilm(Model model, Integer id) {
-		
+	public String updateFilm(Model model, Integer id,Film film) {
+		film = filmDao.findFilmById(id);
+		boolean filmUpdated = filmDao.updateFilm(id,film);
+		if (filmUpdated) {
+			model.addAttribute("message", "Film with ID " + id + " Updated successfully.");
+		} else {
+			model.addAttribute("message", "Failed to update film with ID " + id + ".");
+		}
 		return "updateFilm";
 		
 	}

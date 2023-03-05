@@ -495,13 +495,15 @@ public class FilmDaoJdbcImpl implements FilmDAO {
 	}
 
 	@Override
-	public Film updateFilm(int filmId, Film film) {
+	public boolean updateFilm(Integer filmId,Film film) {
+		
 	    Connection conn = null;
+	    PreparedStatement stmt = null;
+	    boolean success = false;
 	    try {
 	        conn = DriverManager.getConnection(URL, user, pass);
-	        conn.setAutoCommit(false); // START TRANSACTION
-	        String sql = "UPDATE film SET title =?, description=?, release_year=?, language_id=?, rental_duration=?, rental_rate=? ,length=?, replacement_cost=?, rating=? ,special_features=?" + " WHERE id=?";
-	        PreparedStatement stmt = conn.prepareStatement(sql);
+	        String sql = "UPDATE film SET title=?, description=?, release_year=?, language_id=?, rental_duration=?, rental_rate=?, length=?, replacement_cost=?, rating=?, special_features=? WHERE id=?";
+	        stmt = conn.prepareStatement(sql);
 	        stmt.setString(1, film.getTitle());
 	        stmt.setString(2, film.getDescription());
 	        stmt.setInt(3, film.getReleaseYear());
@@ -512,26 +514,27 @@ public class FilmDaoJdbcImpl implements FilmDAO {
 	        stmt.setDouble(8, film.getReplacementCost());
 	        stmt.setString(9, film.getRating());
 	        stmt.setString(10, film.getSpecialFeature());
+	      
 
 	        int updateCount = stmt.executeUpdate();
 	        if (updateCount == 1) {
-	           
-	           
-	            conn.commit(); // COMMIT TRANSACTION
+	            success = true;
 	        }
 	    } catch (SQLException sqle) {
 	        sqle.printStackTrace();
-	        if (conn != null) {
-	            try {
-	                conn.rollback();
-	            } // ROLLBACK TRANSACTION ON ERROR
-	            catch (SQLException sqle2) {
-	                System.err.println("Error trying to rollback");
+	    } finally {
+	        try {
+	            if (stmt != null) {
+	                stmt.close();
 	            }
+	            if (conn != null) {
+	                conn.close();
+	            }
+	        } catch (SQLException sqle) {
+	            sqle.printStackTrace();
 	        }
-	        return null;
 	    }
-	    return film;
+	    return success;
 	}
 
 
