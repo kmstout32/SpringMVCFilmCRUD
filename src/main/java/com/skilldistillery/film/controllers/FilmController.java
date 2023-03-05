@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.skilldistillery.film.data.FilmDAO;
 
@@ -17,7 +18,7 @@ import com.skilldistillery.film.entities.Film;
 
 @Controller
 public class FilmController {
-@Autowired
+	@Autowired
 	private FilmDAO filmDao;
 
 	@RequestMapping(path = { "/", "home.do" })
@@ -30,7 +31,7 @@ public class FilmController {
 	public String findByFilmID(Model model, Integer id) {
 		Film film = filmDao.findFilmById(id);
 		if (film != null) {
-			model.addAttribute("film",film);
+			model.addAttribute("film", film);
 			return "filmID";
 		} else {
 			return "error";
@@ -50,8 +51,7 @@ public class FilmController {
 //		return "filmID";
 //	}
 
-	
-	@RequestMapping(path = "filmId.do", method =RequestMethod.POST)
+	@RequestMapping(path = "filmId.do", method = RequestMethod.POST)
 	public String createFilm(Model model, Film film) {
 		Film createdFilm = filmDao.createFilm(film);
 		if (createdFilm != null) {
@@ -62,34 +62,32 @@ public class FilmController {
 		}
 
 	}
-	
 
 	@RequestMapping(path = "deleteFilm.do", method = RequestMethod.POST)
 	public String deleteFilm(Integer id, Model model) {
-	    boolean filmDeleted = filmDao.deleteFilm(id);
-	    if (filmDeleted) {
-	        model.addAttribute("message", "Film with ID " + id + " deleted successfully.");
-	    } else {
-	    	model.addAttribute("message", "Failed to delete film with ID " + id+ ".");
-	    }
-	    return "deleteFilm";
-	}
-
-
-
-	@RequestMapping(path = "keywordFilm.do", method =RequestMethod.GET)
-	public String searchFilmByKeyword(Model model, String keyword) {
-		List<Film> films  = filmDao.findFilmsByKeyword(keyword) ;
-		if(films != null) {
-			model.addAttribute("film",films);
-			return "keywordFilms";			
+		boolean filmDeleted = filmDao.deleteFilm(id);
+		if (filmDeleted) {
+			model.addAttribute("message", "Film with ID " + id + " deleted successfully.");
 		} else {
-			return "error";
+			model.addAttribute("message", "Failed to delete film with ID " + id + ".");
 		}
-		
+		return "deleteFilm";
 	}
+	
 
 
 	
+
+	@RequestMapping(path = "keywordFilm.do", method = RequestMethod.GET)
+	public String searchFilmByKeyword(Model model, String keyword) {
+		List<Film> films = filmDao.findFilmsByKeyword(keyword);
+		if (films != null) {
+			model.addAttribute("film", films);
+			return "keywordFilms";
+		} else {
+			return "error";
+		}
+
+	}
 
 }

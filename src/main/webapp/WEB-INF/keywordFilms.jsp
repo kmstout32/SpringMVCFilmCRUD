@@ -13,23 +13,8 @@
         <c:if test="${not empty film}">
             <h1>Search Results:</h1>
             <table>
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Title</th>
-                        <th>Description</th>
-                        <th>Release Year</th>
-                        <th>Language</th>
-                        <th>Rental Duration</th>
-                        <th>Rental Rate</th>
-                        <th>Length</th>
-                        <th>Replacement Cost</th>
-                        <th>Rating</th>
-                        <th>Special Features</th>
-                        <th>Category</th>
-                    </tr>
-                </thead>
-                <tbody>
+                
+               
                     <c:forEach var="film" items="${film}">
                         <tr>
                             <td>${film.id}</td>
@@ -46,7 +31,7 @@
                             <td>${film.category}</td>
                         </tr>
                     </c:forEach>
-                </tbody>
+              
             </table>
         <form action="home.do">
             <input type="submit" value="Return home">
