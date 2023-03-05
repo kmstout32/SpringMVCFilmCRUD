@@ -9,10 +9,12 @@
 <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body class="text-center">
-	${film}
-
-	<form action="home.do">
-		<input type="submit" value="Return Home">
+	<form action="updateFilm.do" method="post">
+		<input type="hidden" name="id" placeholder=${film.id }value="${film.id }">
+		<label>Title</label>
+		<input type="text" name="title" value="${film.title }">
+		
+		<input type="submit" value="update Film">
 	</form>
 
 </body>

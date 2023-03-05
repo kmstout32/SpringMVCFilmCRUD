@@ -94,10 +94,20 @@ public class FilmController {
 //	}
 
 	@RequestMapping(path = "updateFilm.do", method = RequestMethod.POST)
-	public String updateFilm(Model model, Integer id, Film film) {
-		film=filmDao.findFilmById(id);
-		model.addAttribute("film",film);
+	public String updateFilm(Model model, Integer id, Film updated) {
+		Film film=filmDao.findFilmById(id);
+		film.setTitle(updated.getTitle());
+		film.setCategory(updated.getCategory());
+		film.setDescription(updated.getDescription());
+		film.setLanguage(updated.getLanguage());
+		
 		boolean updatedFilm = filmDao.updateFilm(film);
+		if (updatedFilm) {
+			model.addAttribute("message", "Film with ID " + id + " deleted successfully.");
+		} else {
+			model.addAttribute("message", "Failed to delete film with ID " + id + ".");
+		}
+		
 		return "updateFilm";
 
 	}
