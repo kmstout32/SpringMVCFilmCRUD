@@ -30,27 +30,7 @@
 					<th>Release Year</th>
 					<td>${film.releaseYear}</td>
 				</tr>
-				<tr>
-					<th>Language ID</th>
-					<td>${film.languageId}</td>
-				</tr>
-				
-				<tr>
-					<th>Rating</th>
-					<td>${film.rating}</td>
-				</tr>
-				<tr>
-					<th>Rental Rate</th>
-					<td>${film.rentalRate}</td>
-				</tr>
-				<tr>
-					<th>Length</th>
-					<td>${film.length} minutes</td>
-				</tr>
-				<tr>
-					<th>Special Features</th>
-					<td>${film.specialFeature}</td>
-				</tr>
+		
 			</table>
 		</c:when>
 
