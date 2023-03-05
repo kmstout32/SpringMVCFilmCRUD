@@ -76,11 +76,12 @@ public class FilmController {
 	}
 
 
+
 	@RequestMapping(path = "keywordFilm.do", method =RequestMethod.POST)
 	public String searchFilmByKeyword(Model model, String keyword) {
 		List<Film> films  = filmDao.searchFilmByKeyWord(keyword) ;
 		if(films != null) {
-			model.addAllAttributes(films);
+			model.addAttribute(films);
 			return "keywordFilm";			
 		} else {
 			return "error";
