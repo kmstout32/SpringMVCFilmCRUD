@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.skilldistillery.film.data.FilmDAO;
 import com.skilldistillery.film.data.FilmDaoJdbcImpl;
@@ -60,13 +61,16 @@ public class FilmController {
 
 	}
 	
-	@RequestMapping(path = "deleteFilm.do", method =RequestMethod.POST)
-	public String deleteFilm(Model model, Film film) {
-		boolean result  = filmDao.deleteFilm(film);
-		return "deleteFilm";
-		
-	}
+
+	@RequestMapping(path = "deleteFilm.do", method = RequestMethod.POST)
+	public String deleteFilm(int filmId) {
 	
+		boolean filmDeleted = filmDao.deleteFilm(filmDao.findFilmById(filmId));
+		
+		return "deleteFilm.jsp";
+	}
+
+
 	
 	
 	

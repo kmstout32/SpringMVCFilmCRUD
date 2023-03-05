@@ -34,7 +34,7 @@
 					<th>Language ID</th>
 					<td>${film.languageId}</td>
 				</tr>
-				
+
 				<tr>
 					<th>Rating</th>
 					<td>${film.rating}</td>
@@ -45,7 +45,7 @@
 				</tr>
 				<tr>
 					<th>Length</th>
-					<td>${film.length} minutes</td>
+					<td>${film.length}minutes</td>
 				</tr>
 				<tr>
 					<th>Special Features</th>
@@ -57,6 +57,9 @@
 	</c:choose>
 	<form action="home.do">
 		<input type="submit" value="Return Home">
+	</form>
+	<form action="deleteFilm.do" method = "POST">
+		<input type="submit" value="Delete film">
 	</form>
 </body>
 </html>

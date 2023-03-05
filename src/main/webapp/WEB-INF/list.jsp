@@ -7,7 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-<p>film deleted</p>
-${result}
+${films}
 </body>
 </html>
