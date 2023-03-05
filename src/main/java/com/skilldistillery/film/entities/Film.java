@@ -95,6 +95,21 @@ public class Film {
 		// TODO Auto-generated constructor stub
 	}
 	
+	public Film(String title, String desc, Integer releaseYear, Integer langId, Integer rentalDuration,
+			Double rentalRate, Integer length, Double replacementCost, String rating, String specialFeat) {
+		this.title = title;
+		this.description = desc;
+		this.releaseYear = releaseYear;
+		this.languageId = langId;
+		this.rentalDuration = rentalDuration;
+		this.rentalRate = rentalRate;
+		this.length = length;
+		this.replacementCost = replacementCost;
+		this.rating = rating;
+		this.specialFeature = specialFeat;
+	}
+
+
 	public Integer getId() {
 		return id;
 	}
