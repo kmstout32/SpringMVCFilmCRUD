@@ -77,11 +77,11 @@ public class FilmController {
 
 
 
-	@RequestMapping(path = "keywordFilm.do", method =RequestMethod.POST)
+	@RequestMapping(path = "keywordFilm.do", method =RequestMethod.GET)
 	public String searchFilmByKeyword(Model model, String keyword) {
 		List<Film> films  = filmDao.findFilmsByKeyword(keyword) ;
 		if(films != null) {
-			model.addAttribute(films);
+			model.addAttribute("film",films);
 			return "keywordFilms";			
 		} else {
 			return "error";
@@ -89,8 +89,7 @@ public class FilmController {
 		
 	}
 
-	
-	
+
 	
 
 }
