@@ -89,5 +89,11 @@ public class FilmController {
 		}
 
 	}
+	@RequestMapping(path = "updateFilm.do", method= RequestMethod.POST)
+	public String updateFilm(Model model, Integer id) {
+		
+		return "updateFilm";
+		
+	}
 
 }
