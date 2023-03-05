@@ -73,10 +73,6 @@ public class FilmController {
 		}
 		return "deleteFilm";
 	}
-	
-
-
-	
 
 	@RequestMapping(path = "keywordFilm.do", method = RequestMethod.GET)
 	public String searchFilmByKeyword(Model model, String keyword) {
@@ -89,17 +85,26 @@ public class FilmController {
 		}
 
 	}
-	@RequestMapping(path = "updateFilm.do", method= RequestMethod.POST)
-	public String updateFilm(Model model, Integer id,Film film) {
+
+	@RequestMapping(path = "edit.do", method = RequestMethod.POST)
+	public String editAFilm(Model model, Integer id,Film film) {
 		film = filmDao.findFilmById(id);
-		boolean filmUpdated = filmDao.updateFilm(id,film);
+		model.addAttribute("film",film);
+		return "edit";
+
+	}
+
+	@RequestMapping(path = "updateFilm.do", method = RequestMethod.POST)
+	public String updateFilm(Model model, Integer id, Film film) {
+		film = filmDao.findFilmById(id);
+		boolean filmUpdated = filmDao.updateFilm(id, film);
 		if (filmUpdated) {
 			model.addAttribute("message", "Film with ID " + id + " Updated successfully.");
 		} else {
 			model.addAttribute("message", "Failed to update film with ID " + id + ".");
 		}
 		return "updateFilm";
-		
+
 	}
 
 }
