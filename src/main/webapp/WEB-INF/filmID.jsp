@@ -51,6 +51,10 @@
 					<th>Special Features</th>
 					<td>${film.specialFeature}</td>
 				</tr>
+				<tr>
+					<th>Actors</th>
+					<td>${film.actorList}</td>
+				</tr>
 			</table>
 		</c:when>
 
