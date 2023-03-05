@@ -197,7 +197,7 @@ public class FilmDaoJdbcImpl implements FilmDAO {
 
 				Actor actor = new Actor(id, fname, lname);
 				actorList.add(actor);
-
+				
 			}
 			rs.close();
 			stmt.close();
