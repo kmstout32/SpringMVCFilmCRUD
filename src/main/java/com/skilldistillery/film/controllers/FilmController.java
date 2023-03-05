@@ -101,5 +101,18 @@ public class FilmController {
 		return "updateFilm";
 
 	}
+	  @RequestMapping(path = "updateFilm.do", method = RequestMethod.POST)
+	  public String filmUpdated(Film film,Integer id ,Model model ){
+		film=filmDao.findFilmById(id);
+	    Film updatedFilm = filmDao.updateFilm(film);
+	    if (updatedFilm != null) {
+	      model.addAttribute("film", updatedFilm);
+	      return "updateFilm";
+	    }
+	    else {
+	      return "error";
+	    }
+	  }
+
 
 }

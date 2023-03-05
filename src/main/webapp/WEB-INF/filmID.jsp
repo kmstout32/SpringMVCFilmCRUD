@@ -98,7 +98,7 @@
 	<form action="deleteFilm.do" method="POST">
 		<input type="submit" value="Delete">
 	</form>
-	<form action="updateFilm.do" method="POST">
+	<form action="updateFilm.do" method="GET">
 		<input type="text" name="id" placeholder="Enter film ID">
 		<input type="submit" value="Update">
 	</form>
