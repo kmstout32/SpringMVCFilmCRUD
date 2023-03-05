@@ -13,6 +13,7 @@
 <ul>
 <li><a href="findFilmByID.html">Find a film by the Film's ID</a></li>
 <li><a href="addAFilm.html">Add a film to the Database</a></li>
+<li><a href="deleteFilm.html">Delete a film</a></li>
 <li><a href="findFilmByKeyword.html">Search films by keyword</a></li>
 
 
