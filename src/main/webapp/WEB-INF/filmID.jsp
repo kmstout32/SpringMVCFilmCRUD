@@ -56,7 +56,7 @@
 				<td>
 					<ul>
 						<c:forEach items="${film.actorList}" var="actor">
-							<li>${actor.firstName}${actor.lastName}</li>
+							<li>${actor.firstName} ${actor.lastName}</li>
 						</c:forEach>
 					</ul>
 				</td>
