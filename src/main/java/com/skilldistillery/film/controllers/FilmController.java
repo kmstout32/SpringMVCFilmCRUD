@@ -1,6 +1,7 @@
 package com.skilldistillery.film.controllers;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -70,6 +71,17 @@ public class FilmController {
 		return "deleteFilm.jsp";
 	}
 
+	@RequestMapping(path = "keywordFilm.do", method =RequestMethod.POST)
+	public String searchFilmByKeyword(Model model, String keyword) {
+		List<Film> films  = filmDao.searchFilmByKeyWord(keyword) ;
+		if(films != null) {
+			model.addAllAttributes(films);
+			return "keywordFilm";			
+		} else {
+			return "error";
+		}
+		
+	}
 
 	
 	
