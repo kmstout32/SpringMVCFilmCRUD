@@ -9,5 +9,8 @@
 <body>
 <h1>Delete Film Result</h1>
 <p>${message}</p>
+<form action="home.do"> 
+      <input type="submit" value="Return Home">
+      </form>
 </body>
 </html>
