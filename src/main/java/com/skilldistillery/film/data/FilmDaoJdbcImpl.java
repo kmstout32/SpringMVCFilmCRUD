@@ -158,7 +158,47 @@ public class FilmDaoJdbcImpl implements FilmDAO {
 		return film;
 
 	}
+	@Override
+	public Film findFilmById1(int filmId) {
+		Film film = null;
 
+		String sql = "SELECT id, title, description, release_year,"
+				+  " rental_rate, length, rating,"
+				+ "special_features FROM film WHERE id = ?";
+
+		Connection conn;
+		try {
+			conn = DriverManager.getConnection(URL, user, pass);
+			PreparedStatement stmt = conn.prepareStatement(sql);
+
+			stmt.setInt(1, filmId);
+			ResultSet filmResult = stmt.executeQuery();
+
+			if (filmResult.next()) {
+				film = new Film();
+
+				film.setId(filmResult.getInt("id"));
+				film.setTitle(filmResult.getString("title"));
+				film.setDescription(filmResult.getString("description"));
+				film.setReleaseYear(filmResult.getInt("release_year"));
+				film.setLanguageId(filmResult.getInt("language_id"));
+				film.setRentalDuration(filmResult.getInt("rental_duration"));
+				film.setRentalRate(filmResult.getDouble("rental_rate"));
+				film.setLength(filmResult.getInt("length"));
+				film.setReplacementCost(filmResult.getDouble("replacement_cost"));
+				film.setRating(filmResult.getString("rating"));
+				film.setSpecialFeature(filmResult.getString("special_features"));
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+
+			e.printStackTrace();
+
+		}
+
+		return film;
+
+	}
 	public List<Film> displayFilms() {
 		List<Film> films = new ArrayList<>();
 		List<Actor> actors = new ArrayList<>();
@@ -496,47 +536,71 @@ public class FilmDaoJdbcImpl implements FilmDAO {
 
 	@Override
 	public Film updateFilm(Film film) {
-		int filmID = film.getId();
-		Connection conn = null;
-		try {
-			conn = DriverManager.getConnection(URL, user, pass);
-			conn.setAutoCommit(false);
-			;
-			String sql = "UPDATE film SET title= ?, description= ?, release_year= ?, language_id= ?,"
-					+ " rental_duration=? , rental_rate= ?, length= ?, replacement_cost= ?, rating= ?, special_features= ?"
-					+ " WHERE id= ?";
-			PreparedStatement stmt = conn.prepareStatement(sql);
-			stmt.setString(1, film.getTitle());
-			stmt.setString(2, film.getDescription());
-			stmt.setInt(3, film.getReleaseYear());
-			stmt.setInt(4, film.getLanguageId());
-			stmt.setInt(5, film.getRentalDuration());
-			stmt.setDouble(6, film.getRentalRate());
-			stmt.setInt(7, film.getLength());
-			stmt.setDouble(8, film.getReplacementCost());
-			stmt.setString(9, film.getRating());
-			stmt.setString(10, film.getSpecialFeature());
-			stmt.setInt(11, filmID);
-			int updateCount = stmt.executeUpdate();
-			if (updateCount == 1) {
-				conn.commit();
-//			stmt.close();
-//			conn.close(); 
-			} else {
-				System.out.println("somethings wrong idiot");
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-			try {
-				conn.rollback();
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-		}
-		return film;
+	    int filmID = film.getId();
+	    Connection conn = null;
+	    try {
+	        conn = DriverManager.getConnection(URL, user, pass);
+	        conn.setAutoCommit(false);
+
+	        StringBuilder sql = new StringBuilder("UPDATE film SET ");
+	        List<Object> params = new ArrayList<Object>();
+	        if (film.getTitle() != null) {
+	            sql.append("title=?, ");
+	            params.add(film.getTitle());
+	        }
+	        if (film.getDescription() != null) {
+	            sql.append("description=?, ");
+	            params.add(film.getDescription());
+	        }
+	        if (film.getReleaseYear() != null) {
+	            sql.append("release_year=?, ");
+	            params.add(film.getReleaseYear());
+	        }
+	        if (film.getRentalRate() != null) {
+	            sql.append("rental_rate=?, ");
+	            params.add(film.getRentalRate());
+	        }
+	        if (film.getLength() != null) {
+	            sql.append("length=?, ");
+	            params.add(film.getLength());
+	        }
+	        if (film.getRating() != null) {
+	            sql.append("rating=?, ");
+	            params.add(film.getRating());
+	        }
+	        if (film.getSpecialFeature() != null) {
+	            sql.append("special_features=?, ");
+	            params.add(film.getSpecialFeature());
+	        }
+	        sql.deleteCharAt(sql.length() - 2); // remove trailing comma and space
+	        sql.append("WHERE id=?");
+	        params.add(filmID);
+
+	        PreparedStatement stmt = conn.prepareStatement(sql.toString());
+	        for (int i = 0; i < params.size(); i++) {
+	            stmt.setObject(i + 1, params.get(i));
+	        }
+
+	        int updateCount = stmt.executeUpdate();
+	        if (updateCount == 1) {
+	            conn.commit();
+	        } else {
+	            System.out.println("Something went wrong.");
+	        }
+
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	        try {
+	            conn.rollback();
+	        } catch (SQLException e1) {
+	            e1.printStackTrace();
+	        }
+	    }
+
+	    return film;
 	}
 
+	
 	static {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");

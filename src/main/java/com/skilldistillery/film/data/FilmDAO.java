@@ -23,5 +23,7 @@ public interface FilmDAO {
 
 	public boolean deleteFilm(int filmId);
 
+	Film findFilmById1(int filmId);
+
 
 }

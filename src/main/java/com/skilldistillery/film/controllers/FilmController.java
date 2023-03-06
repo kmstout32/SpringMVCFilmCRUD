@@ -93,20 +93,23 @@ public class FilmController {
 //
 //	}
 
-	@RequestMapping(path = "updateFilm.do", method = RequestMethod.GET)
+	@RequestMapping(path = "filmUpdatedform.do", method = RequestMethod.GET)
 	public String updateFilm(Model model, Integer id, Film updated) {
 		Film film=filmDao.findFilmById(id);
 		model.addAttribute(film);
 		
-		return "updateFilm";
+		return "filmUpdatedform";
 
 	}
 	  @RequestMapping(path = "updateFilm.do", method = RequestMethod.POST)
 	  public String filmUpdated(Film film,Integer id ,Model model ){
-		film=filmDao.findFilmById(id);
+		  if (film == null) {
+			    System.out.println("hiiiiiiiiiiiiii");
+			}
 	    Film updatedFilm = filmDao.updateFilm(film);
 	    if (updatedFilm != null) {
 	      model.addAttribute("film", updatedFilm);
+	      System.out.println(updatedFilm);
 	      return "updateFilm";
 	    }
 	    else {
