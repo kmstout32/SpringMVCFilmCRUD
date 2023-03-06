@@ -102,8 +102,8 @@
 	</form>
 	
 	<form action="deleteFilm.do" method="POST">
-		<label for="id">Enter a film's ID:</label> <input id="id" name="id"
-			type="text"> <input type="submit" value="Delete film">
+		 <input value="${film.id}" id="id" name="id"type="text" value> 
+		 <input type="submit" value="Delete film">
 	</form>
 	<ul>
 

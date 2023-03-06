@@ -10,7 +10,7 @@
 </head>
 <body>
 	<div class="alert alert-danger" role="alert">
-            <p>No film found with the given ID.</p>
+            <p>No film.</p>
       </div>
       <form action="home.do"> 
       <input type="submit" value="Return Home">

@@ -67,7 +67,7 @@ public class FilmController {
 	@RequestMapping(path = "keywordFilm.do", method = RequestMethod.GET)
 	public String searchFilmByKeyword(Model model, String keyword) {
 		List<Film> films = filmDao.findFilmsByKeyword(keyword);
-		if (films != null) {
+		if (!films.isEmpty()) {
 			model.addAttribute("film", films);
 			return "keywordFilms";
 		} else {
