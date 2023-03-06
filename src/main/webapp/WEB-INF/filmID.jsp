@@ -14,10 +14,17 @@
 	crossorigin="anonymous">
 <link rel="stylesheet" type="text/css" href="style.css">
 </head>
-<body>
+<body >
 
 	<c:if test="${not empty film}">
 		<table>
+			<c:if test="${not empty film.id}">
+				<tr>
+					<th>ID</th>
+					<td>${film.id}</td>
+					
+				</tr>
+			</c:if>
 			<c:if test="${not empty film.title}">
 				<tr>
 					<th>Title</th>
@@ -96,8 +103,8 @@
 		<input type="submit" value="Return Home">
 	</form>
 	<form action="deleteFilm.do" method="POST">
-		<input type="submit" value="Delete">
-	</form>
+							<button name="delete" type="submit" value="${film.id}">Delete Film</button>
+						</form>Ï
 	<form action="updateFilm.do" method="GET">
 		<input type="text" name="id" placeholder="Enter film ID">
 		<input type="submit" value="Update">
