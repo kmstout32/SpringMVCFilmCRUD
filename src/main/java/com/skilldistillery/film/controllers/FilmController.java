@@ -95,26 +95,35 @@ public class FilmController {
 
 	@RequestMapping(path = "updateFilmForm.do", method = RequestMethod.GET)
 	public String updateFilm(Model model, Integer id, Film updated) {
-		Film film=filmDao.findFilmById(id);
-		model.addAttribute(film);
-		
-		return "updateFilmForm";
+		try {
+			Film film=filmDao.findFilmById(id);
+			model.addAttribute(film);
+			
+			return "updateFilm";
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			return "error";
+		}
 
 	}
 	  @RequestMapping(path = "filmUpdated.do", method = RequestMethod.POST)
 	  public String filmUpdated(Film film,Integer id ,Model model ){
-		  if (film == null) {
-			    System.out.println("hiiiiiiiiiiiiii");
+		 
+	    try {
+			Film updatedFilm = filmDao.updateFilm(film);
+			if (updatedFilm != null) {
+			  model.addAttribute("film", updatedFilm);
+			  System.out.println(updatedFilm);
+			  return "filmUpdated";
 			}
-	    Film updatedFilm = filmDao.updateFilm(film);
-	    if (updatedFilm != null) {
-	      model.addAttribute("film", updatedFilm);
-	      System.out.println(updatedFilm);
-	      return "filmUpdated";
-	    }
-	    else {
-	      return "error";
-	    }
+			else {
+			  return "error";
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			return "error";
+		}
+		
 	  }
 
 
