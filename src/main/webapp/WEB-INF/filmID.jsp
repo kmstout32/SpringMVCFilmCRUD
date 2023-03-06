@@ -96,7 +96,15 @@
 		<input type="submit" value="Return Home">
 	</form>
 	
+	<form action="updateFilmForm.do" method="GET">
+		<input type="text" name="id" placeholder="Enter film ID" value="${film.id}" >
+		<input type="submit" value="Update">
+	</form>
 	
+	<form action="deleteFilm.do" method="POST">
+		<label for="id">Enter a film's ID:</label> <input id="id" name="id"
+			type="text"> <input type="submit" value="Delete film">
+	</form>
 	<ul>
 
 </ul>
