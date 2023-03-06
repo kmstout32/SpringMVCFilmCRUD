@@ -96,10 +96,7 @@
 		<input type="submit" value="Return Home">
 	</form>
 	
-	<form action="updateFilmForm.do" method="GET">
-		<input type="text" name="id" placeholder="Enter film ID" value="${film.id}" >
-		<input type="submit" value="Update">
-	</form>
+	
 	<ul>
 
 </ul>

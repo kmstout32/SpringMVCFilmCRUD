@@ -25,9 +25,15 @@
 							a film</a></li>
 					<li class="list-group-item"><a href="findFilmByKeyword.html">Search
 							films by keyword</a></li>
-					
-					
+					<li class="list-group-item">
+						<form action="updateFilmForm.do" method="GET">
+							<input type="text" name="id" placeholder="Enter film ID"
+								value="${film.id}"> <input type="submit" value="Update">
+						</form>
+					</li>
 				</ul>
+
+				
 			</div>
 		</div>
 	</div>
