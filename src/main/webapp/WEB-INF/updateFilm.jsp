@@ -22,20 +22,20 @@
 
 	<form method="POST" action="filmUpdated.do">
 
-		<input type="hidden" name="id" value="${film.id}" />
-		<label for="title">Title:</label>
+		<input type="hidden" name="id" value="${film.id}" /><br>
+		<label for="title">Title:</label><br>
 		<input type="text" name="title" value="${film.title}" /><br>
-		<label for="description">Description:</label>
+		<label for="description">Description:</label><br>
 		<textarea name="description">${film.description}</textarea><br>
-		<label for="releaseYear">Release Year:</label>
+		<label for="releaseYear">Release Year:</label><br>
 		<input type="text" name="releaseYear" value="${film.releaseYear}" /><br>
-		<label for="rentalRate">Rental Rate:</label>
+		<label for="rentalRate">Rental Rate:</label><br>
 		<input type="text" name="rentalRate" value="${film.rentalRate}" /><br>
-		<label for="length">Length:</label>
+		<label for="length">Length:</label><br>
 		<input type="text" name="length" value="${film.length}" /><br>
-		<label for="rating">Rating:</label>
+		<label for="rating">Rating:</label><br>
 		<input type="text" name="rating" value="${film.rating}" /><br>
-		<label for="specialFeature">Special Feature:</label>
+		<label for="specialFeature">Special Feature:</label><br>
 		<input type="text" name="specialFeature" value="${film.specialFeature}" /><br>
 		<input type="submit" value="Update Film" />
 	</form>
