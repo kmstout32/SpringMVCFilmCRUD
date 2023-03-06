@@ -63,7 +63,6 @@ public class FilmController {
 
 	}
 
-
 	@RequestMapping(path = "keywordFilm.do", method = RequestMethod.GET)
 	public String searchFilmByKeyword(Model model, String keyword) {
 		List<Film> films = filmDao.findFilmsByKeyword(keyword);
@@ -75,6 +74,7 @@ public class FilmController {
 		}
 
 	}
+
 	@RequestMapping(path = "deleteFilm.do", method = RequestMethod.POST)
 	public String deleteFilm(Integer id, Model model) {
 		boolean filmDeleted = filmDao.deleteFilm(id);
@@ -96,9 +96,9 @@ public class FilmController {
 	@RequestMapping(path = "updateFilmForm.do", method = RequestMethod.GET)
 	public String updateFilm(Model model, Integer id, Film updated) {
 		try {
-			Film film=filmDao.findFilmById(id);
+			Film film = filmDao.findFilmById(id);
 			model.addAttribute(film);
-			
+
 			return "updateFilm";
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -106,25 +106,24 @@ public class FilmController {
 		}
 
 	}
-	  @RequestMapping(path = "filmUpdated.do", method = RequestMethod.POST)
-	  public String filmUpdated(Film film,Integer id ,Model model ){
-		 
-	    try {
+
+	@RequestMapping(path = "filmUpdated.do", method = RequestMethod.POST)
+	public String filmUpdated(Film film, Integer id, Model model) {
+
+		try {
 			Film updatedFilm = filmDao.updateFilm(film);
 			if (updatedFilm != null) {
-			  model.addAttribute("film", updatedFilm);
-			  System.out.println(updatedFilm);
-			  return "filmUpdated";
-			}
-			else {
-			  return "error";
+				model.addAttribute("film", updatedFilm);
+				System.out.println(updatedFilm);
+				return "filmUpdated";
+			} else {
+				return "error";
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			return "error";
 		}
-		
-	  }
 
+	}
 
 }

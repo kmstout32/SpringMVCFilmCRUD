@@ -35,8 +35,8 @@
 		<input type="text" name="length" value="${film.length}" /><br>
 		<label for="rating">Rating:</label><br>
 		<input type="text" name="rating" value="${film.rating}" /><br>
-		<label for="specialFeature">Special Feature:</label><br>
-		<input type="text" name="specialFeature" value="${film.specialFeature}" /><br>
+		<label for="specialFeature">Special Feature:</label><br> <input type="text" name="specialFeature"
+			value="${film.specialFeature}" /><br>
 		<input type="submit" value="Update Film" />
 	</form>
 </body>

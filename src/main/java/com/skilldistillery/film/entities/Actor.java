@@ -1,15 +1,14 @@
 package com.skilldistillery.film.entities;
 
-
 import java.util.List;
 import java.util.Objects;
 
 public class Actor {
-	  private Integer id;
-	  private String firstName;
-	  private String lastName;
-	  private List<Film> films;
-	  
+	private Integer id;
+	private String firstName;
+	private String lastName;
+	private List<Film> films;
+
 	public Actor() {
 		super();
 	}
@@ -44,7 +43,6 @@ public class Actor {
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
-	
 
 	@Override
 	public String toString() {
@@ -74,6 +72,4 @@ public class Actor {
 		this.films = films;
 	}
 
-
-	
 }

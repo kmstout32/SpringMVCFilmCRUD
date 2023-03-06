@@ -158,12 +158,12 @@ public class FilmDaoJdbcImpl implements FilmDAO {
 		return film;
 
 	}
+
 	@Override
 	public Film findFilmById1(int filmId) {
 		Film film = null;
 
-		String sql = "SELECT id, title, description, release_year,"
-				+  " rental_rate, length, rating,"
+		String sql = "SELECT id, title, description, release_year," + " rental_rate, length, rating,"
 				+ "special_features FROM film WHERE id = ?";
 
 		Connection conn;
@@ -199,6 +199,7 @@ public class FilmDaoJdbcImpl implements FilmDAO {
 		return film;
 
 	}
+
 	public List<Film> displayFilms() {
 		List<Film> films = new ArrayList<>();
 		List<Actor> actors = new ArrayList<>();
@@ -536,71 +537,70 @@ public class FilmDaoJdbcImpl implements FilmDAO {
 
 	@Override
 	public Film updateFilm(Film film) {
-	    int filmID = film.getId();
-	    Connection conn = null;
-	    try {
-	        conn = DriverManager.getConnection(URL, user, pass);
-	        conn.setAutoCommit(false);
+		int filmID = film.getId();
+		Connection conn = null;
+		try {
+			conn = DriverManager.getConnection(URL, user, pass);
+			conn.setAutoCommit(false);
 
-	        StringBuilder sql = new StringBuilder("UPDATE film SET ");
-	        List<Object> params = new ArrayList<Object>();
-	        if (film.getTitle() != null) {
-	            sql.append("title=?, ");
-	            params.add(film.getTitle());
-	        }
-	        if (film.getDescription() != null) {
-	            sql.append("description=?, ");
-	            params.add(film.getDescription());
-	        }
-	        if (film.getReleaseYear() != null) {
-	            sql.append("release_year=?, ");
-	            params.add(film.getReleaseYear());
-	        }
-	        if (film.getRentalRate() != null) {
-	            sql.append("rental_rate=?, ");
-	            params.add(film.getRentalRate());
-	        }
-	        if (film.getLength() != null) {
-	            sql.append("length=?, ");
-	            params.add(film.getLength());
-	        }
-	        if (film.getRating() != null) {
-	            sql.append("rating=?, ");
-	            params.add(film.getRating());
-	        }
-	        if (film.getSpecialFeature() != null) {
-	            sql.append("special_features=?, ");
-	            params.add(film.getSpecialFeature());
-	        }
-	        sql.deleteCharAt(sql.length() - 2); 
-	        sql.append("WHERE id=?");
-	        params.add(filmID);
+			StringBuilder sql = new StringBuilder("UPDATE film SET ");
+			List<Object> params = new ArrayList<Object>();
+			if (film.getTitle() != null) {
+				sql.append("title=?, ");
+				params.add(film.getTitle());
+			}
+			if (film.getDescription() != null) {
+				sql.append("description=?, ");
+				params.add(film.getDescription());
+			}
+			if (film.getReleaseYear() != null) {
+				sql.append("release_year=?, ");
+				params.add(film.getReleaseYear());
+			}
+			if (film.getRentalRate() != null) {
+				sql.append("rental_rate=?, ");
+				params.add(film.getRentalRate());
+			}
+			if (film.getLength() != null) {
+				sql.append("length=?, ");
+				params.add(film.getLength());
+			}
+			if (film.getRating() != null) {
+				sql.append("rating=?, ");
+				params.add(film.getRating());
+			}
+			if (film.getSpecialFeature() != null) {
+				sql.append("special_features=?, ");
+				params.add(film.getSpecialFeature());
+			}
+			sql.deleteCharAt(sql.length() - 2);
+			sql.append("WHERE id=?");
+			params.add(filmID);
 
-	        PreparedStatement stmt = conn.prepareStatement(sql.toString());
-	        for (int i = 0; i < params.size(); i++) {
-	            stmt.setObject(i + 1, params.get(i));
-	        }
+			PreparedStatement stmt = conn.prepareStatement(sql.toString());
+			for (int i = 0; i < params.size(); i++) {
+				stmt.setObject(i + 1, params.get(i));
+			}
 
-	        int updateCount = stmt.executeUpdate();
-	        if (updateCount == 1) {
-	            conn.commit();
-	        } else {
-	            System.out.println("Something went wrong.");
-	        }
+			int updateCount = stmt.executeUpdate();
+			if (updateCount == 1) {
+				conn.commit();
+			} else {
+				System.out.println("Something went wrong.");
+			}
 
-	    } catch (SQLException e) {
-	        e.printStackTrace();
-	        try {
-	            conn.rollback();
-	        } catch (SQLException e1) {
-	            e1.printStackTrace();
-	        }
-	    }
+		} catch (SQLException e) {
+			e.printStackTrace();
+			try {
+				conn.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+		}
 
-	    return film;
+		return film;
 	}
 
-	
 	static {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");

@@ -25,5 +25,4 @@ public interface FilmDAO {
 
 	Film findFilmById1(int filmId);
 
-
 }

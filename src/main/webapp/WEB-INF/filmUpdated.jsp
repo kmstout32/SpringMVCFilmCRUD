@@ -22,7 +22,7 @@
 				<tr>
 					<th>Title</th>
 					<td>${film.title}</td>
-					
+
 				</tr>
 			</c:if>
 			<c:if test="${not empty film.description}">
@@ -59,7 +59,8 @@
 			<c:if test="${not empty film.length}">
 				<tr>
 					<th>Length</th>
-					<td>${film.length} <span>minutes</span> </td>
+					<td>${film.length}<span>minutes</span>
+					</td>
 				</tr>
 			</c:if>
 			<c:if test="${not empty film.specialFeature}">
@@ -98,7 +99,7 @@
 
 	<ul>
 
-</ul>
+	</ul>
 </body>
 </html>
 

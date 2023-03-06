@@ -22,7 +22,7 @@
 				<tr>
 					<th>Title</th>
 					<td>${film.title}</td>
-					
+
 				</tr>
 			</c:if>
 			<c:if test="${not empty film.description}">
@@ -59,7 +59,8 @@
 			<c:if test="${not empty film.length}">
 				<tr>
 					<th>Length</th>
-					<td>${film.length} <span>minutes</span> </td>
+					<td>${film.length}<span>minutes</span>
+					</td>
 				</tr>
 			</c:if>
 			<c:if test="${not empty film.specialFeature}">
@@ -95,19 +96,19 @@
 	<form action="home.do">
 		<input type="submit" value="Return Home">
 	</form>
-	
+
 	<form action="updateFilmForm.do" method="GET">
-		<input type="text" name="id" placeholder="Enter film ID" value="${film.id}" >
-		<input type="submit" value="Update">
+		<input type="text" name="id" placeholder="Enter film ID"
+			value="${film.id}"> <input type="submit" value="Update">
 	</form>
-	
+
 	<form action="deleteFilm.do" method="POST">
-		 <input value="${film.id}" id="id" name="id"type="text" value> 
-		 <input type="submit" value="Delete film">
+		<input value="${film.id}" id="id" name="id" type="text" value>
+		<input type="submit" value="Delete film">
 	</form>
 	<ul>
 
-</ul>
+	</ul>
 </body>
 </html>
 
