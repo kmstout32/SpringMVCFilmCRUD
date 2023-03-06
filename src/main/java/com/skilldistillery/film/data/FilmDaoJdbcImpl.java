@@ -572,7 +572,7 @@ public class FilmDaoJdbcImpl implements FilmDAO {
 	            sql.append("special_features=?, ");
 	            params.add(film.getSpecialFeature());
 	        }
-	        sql.deleteCharAt(sql.length() - 2); // remove trailing comma and space
+	        sql.deleteCharAt(sql.length() - 2); 
 	        sql.append("WHERE id=?");
 	        params.add(filmID);
 
